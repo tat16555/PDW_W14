@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
     <!-- นำเข้า navigation logic -->
-        <a class="navbar-brand" href="index.php">Home</a>
+        <a class="navbar-brand" href="../../index.php">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,17 +11,17 @@
                     <a class="nav-link" href="../../content/users/index.php">Data</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link" href="../../content/session/index.html">session</a>
+                    <a class="nav-link" href="../../content/session/index.php">session</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link" href="../../content/cookie/index.html">cookie</a>
+                    <a class="nav-link" href="../../content/cookie/index.php">cookie</a>
                 </li>             
                 <?php
                     // ตรวจสอบว่ามี session user_login อยู่หรือไม่
                     if (isset($_SESSION['user_login'])) {
                         // ถ้ามี session user_login แสดงชื่อผู้ใช้แทนที่ปุ่ม Register
                         echo '<li class="nav-item">
-                                <a class="nav-link" href="#about">' . htmlspecialchars($row['u_name']) . '</a>
+                                <a class="nav-link" href="../session/users.php">' . htmlspecialchars($row['u_name']) . '</a>
                             </li>';
                         
                         // แสดงปุ่ม Log out

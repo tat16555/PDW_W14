@@ -1,9 +1,5 @@
 <?php 
 session_start();
-if (!isset($_SESSION['user_login'])) {
-    $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ!';
-    header('location: ../login_fm/login_fm.php');
-}
 require_once("../../common/connect.php");
 require_once("../../container/session/isset_user.php");
 ?>
@@ -18,22 +14,30 @@ require_once("../../container/session/isset_user.php");
 </head>
 <body>
 <?php require_once("../nav/nav.php"); ?>
+<?php
+if (!isset($_SESSION['user_login'])) {
+    $_SESSION['error_login'] = 'กรุณาเข้าสู่ระบบ!';
+    header('location: ../../index.php');
+}
+?>
     <div class="container my-5">
-        <h1>ข้อมูลสมาชิก</h1>
-        <div><a href="create_frm.php" class="btn btn-success mb-2">+ข้อมูล</a></div>
         <?php if(isset($_SESSION['success'])): ?>
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?php echo $_SESSION['success']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php unset($_SESSION['success']); ?>
         <?php endif; ?>
 
         <?php if(isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?php echo $_SESSION['error']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
+        <h1>ข้อมูลสมาชิก</h1>
+        <div><a href="create_frm.php" class="btn btn-success mb-2">+ข้อมูล</a></div>
         <table class="table table-info table-striped">
             <thead>
                 <tr>
@@ -90,5 +94,7 @@ require_once("../../container/session/isset_user.php");
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

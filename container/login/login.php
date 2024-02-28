@@ -1,10 +1,6 @@
 <?php
 session_start();
 require_once '../../common/connect.php';
-// Enable error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 if (isset($_POST['u_email'])) {
     $u_email = $_POST['u_email'];
     $password = $_POST['password'];
@@ -23,11 +19,10 @@ if (isset($_POST['u_email'])) {
             if ($check_data->rowCount() > 0) {
                 // User found in the database
                 if (password_verify($password, $row['password'])) {
-                    // Password is correct
-
-                    // Set session variables based on user role
                     if ($row['Status'] == 'true') {
                         $_SESSION['user_login'] = $row['u_id'];
+                        $_SESSION['user_id'] = $row['u_id'];
+                        $_SESSION['user_name'] = $row['u_name']; 
                         $_SESSION['success'] = 'เข้าสู่ระบบสำเร็จ';
                         header("location: ../../content/users/index.php");
                         exit();

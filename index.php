@@ -28,7 +28,7 @@ require_once("container/session/isset_user.php");
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
     <!-- นำเข้า navigation logic -->
-        <a class="navbar-brand" href="content/users/index.php">Home</a>
+        <a class="navbar-brand" href="index.php">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -38,17 +38,17 @@ require_once("container/session/isset_user.php");
                     <a class="nav-link" href="content/users/index.php">Data</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link" href="content/session/index.html">session</a>
+                    <a class="nav-link" href="content/session/index.php">session</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link" href="content/cookie/index.html">cookie</a>
+                    <a class="nav-link" href="content/cookie/index.php">cookie</a>
                 </li>              
                 <?php
                     // ตรวจสอบว่ามี session user_login อยู่หรือไม่
                     if (isset($_SESSION['user_login'])) {
                         // ถ้ามี session user_login แสดงชื่อผู้ใช้แทนที่ปุ่ม Register
                         echo '<li class="nav-item">
-                                <a class="nav-link" href="#about">' . htmlspecialchars($row['u_name']) . '</a>
+                                <a class="nav-link" href="content/session/users.php">' . htmlspecialchars($row['u_name']) . '</a>
                             </li>';
                         
                         // แสดงปุ่ม Log out
@@ -79,18 +79,37 @@ require_once("container/session/isset_user.php");
 </nav>
 <div class="container my-5">
         <?php if(isset($_SESSION['success'])): ?>
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?php echo $_SESSION['success']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php unset($_SESSION['success']); ?>
         <?php endif; ?>
 
+        <?php if(isset($_SESSION['user_logout'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['user_logout']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['user_logout']); ?>
+        <?php endif; ?>
+
         <?php if(isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?php echo $_SESSION['error']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
+        <?php if(isset($_SESSION['error_login'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['error_login']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['error_login']); ?>
+        <?php endif; ?>
+
+        
     <div class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -131,7 +150,7 @@ require_once("container/session/isset_user.php");
                     <div class="card-body">
                         <!-- ส่วนแสดงโค้ด -->
                         <div class="code-window">
-                            <pre><code>&lt;?php
+                            <pre><code>&lt;?php 
     if (isset($_SESSION['user_login'])) {
         $user_id = $_SESSION['user_login'];
         $stmt = $conn->query("SELECT * FROM users WHERE u_id = $user_id");
@@ -172,5 +191,5 @@ require_once("container/session/isset_user.php");
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+ENXzXod1iqOf1KEFfxtuAv/yy6XzoUp5tbulvM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </html>

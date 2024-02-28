@@ -16,18 +16,26 @@ require_once("../../container/session/isset_user.php");
 </head>
 <body>
 <?php require_once("../nav/nav.php"); ?>
-        <?php if(isset($_SESSION['success'])): ?>
-            <div class="alert alert-success" role="alert">
-                <?php echo $_SESSION['success']; ?>
-            </div>
-            <?php unset($_SESSION['success']); ?>
-        <?php endif; ?>
-        <?php if(isset($_SESSION['error'])): ?>
+<div class="container my-5">
+    <?php if(isset($_SESSION['success'])): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $_SESSION['success']; ?>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+    <?php if(isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+    <?php if(isset($_SESSION['error_login'])): ?>
             <div class="alert alert-danger" role="alert">
-                <?php echo $_SESSION['error']; ?>
+                <?php echo $_SESSION['error_login']; ?>
             </div>
-            <?php unset($_SESSION['error']); ?>
+            <?php unset($_SESSION['error_login']); ?>
         <?php endif; ?>
+    
     <div class="container mt-3">
         <form action="../../container/login/login.php" method="POST">
             <div class="mb-3 row">
@@ -48,6 +56,7 @@ require_once("../../container/session/isset_user.php");
             </div>
         </form>
     </div>
+</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+ENXzXod1iqOf1KEFfxtuAv/yy6XzoUp5tbulvM" crossorigin="anonymous"></script>
 </html>
